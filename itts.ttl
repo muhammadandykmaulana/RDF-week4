@@ -1,0 +1,87 @@
+@prefix ex: <http://example.org/itts/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ==========================================
+# 1. DEFINISI KELAS / HIRARKI (TAKSONOMI)
+# ==========================================
+# Mendefinisikan Super-kelas dan kelas dasar
+ex:Orang a rdfs:Class ;
+    rdfs:label "Orang"@id .
+
+ex:MataKuliah a rdfs:Class ;
+    rdfs:label "Mata Kuliah"@id .
+
+# Mendefinisikan Sub-kelas yang merujuk pada ex:Orang
+ex:Dosen a rdfs:Class ;
+    rdfs:subClassOf ex:Orang ;
+    rdfs:label "Dosen"@id ;
+    rdfs:comment "Tenaga pendidik di ITTS"@id .
+
+ex:Mahasiswa a rdfs:Class ;
+    rdfs:subClassOf ex:Orang ;
+    rdfs:label "Mahasiswa"@id ;
+    rdfs:comment "Peserta didik di ITTS"@id .
+
+# ==========================================
+# 2. DEFINISI PROPERTI, DOMAIN, & RANGE
+# ==========================================
+# Properti untuk dosen yang mengajar matkul
+ex:mengajar a rdf:Property ;
+    rdfs:domain ex:Dosen ;
+    rdfs:range ex:MataKuliah ;
+    rdfs:label "mengajar"@id .
+
+# Properti untuk mahasiswa yang mengambil matkul
+ex:ambilMatkul a rdf:Property ;
+    rdfs:domain ex:Mahasiswa ;
+    rdfs:range ex:MataKuliah ;
+    rdfs:label "mengambil mata kuliah"@id .
+
+# ==========================================
+# 3. DEFINISI INDIVIDU (DATA INSTANCE)
+# ==========================================
+# Instance Dosen ITTS
+ex:DhikaAnbiya a ex:Dosen ;
+    rdfs:label "Dhika Anbiya"@id .
+
+ex:AgungBudi a ex:Dosen ;
+    rdfs:label "Agung Budi"@id .
+
+ex:Yusuf a ex:Dosen ;
+    rdfs:label "Yusuf"@id .
+
+# Instance Mahasiswa ITTS
+ex:Andyk a ex:Mahasiswa ;
+    rdfs:label "Andyk"@id .
+
+ex:Indrawan a ex:Mahasiswa ;
+    rdfs:label "Indrawan"@id .
+
+ex:Syahrul a ex:Mahasiswa ;
+    rdfs:label "Syahrul"@id .
+
+# Instance Matkul
+ex:PemrogramanIoT a ex:MataKuliah ;
+    rdfs:label "Pemrograman IoT"@id .
+
+ex:SistemIoT a ex:MataKuliah ;
+    rdfs:label "Sistem IoT"@id .
+
+ex:ArsitekturEnterprise a ex:MataKuliah ;
+    rdfs:label "Arsitektur Enterprise"@id .
+
+# ==========================================
+# 4. HUBUNGAN/RELASI ANTAR INDIVIDU (TRIPLES)
+# ==========================================
+# Dosen mengajar/mengampu matkul
+ex:DhikaAnbiya ex:mengajar ex:SistemIoT .
+ex:AgungBudi ex:mengajar ex:PemrogramanIoT .
+ex:Yusuf ex:mengajar ex:ArsitekturEnterprise .
+
+# Mahasiswa mengambil matkul
+ex:Andyk ex:ambilMatkul ex:SistemIoT .
+ex:Andyk ex:ambilMatkul ex:ArsitekturEnterprise .
+ex:Indrawan ex:ambilMatkul ex:SistemIoT .
+ex:Syahrul ex:ambilMatkul ex:ArsitekturEnterprise .
+ex:Syahrul ex:ambilMatkul ex:PemrogramanIoT .
